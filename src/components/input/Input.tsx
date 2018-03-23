@@ -22,6 +22,8 @@ export interface IInputOwnProps {
     validateOnChange?: boolean;
     disabledOnMount?: boolean;
     validateOnMount?: boolean;
+    rawInput?: boolean;
+    onChangeCallback?: (event: React.ChangeEvent<HTMLInputElement>, value?: string, valid?: boolean) => void;
 }
 
 export interface IInputStateProps {
@@ -83,12 +85,19 @@ export class Input extends React.Component<IInputProps, any> {
         }
     }
 
-    private handleChange() {
+    private handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         if (this.props.onChange) {
             const validOnChange = this.props.validateOnChange
                 && this.props.validate
                 && this.props.validate(this.innerInput.value);
             this.props.onChange(this.innerInput.value, validOnChange);
+        }
+
+        if (this.props.onChangeCallback) {
+            const validOnChange = this.props.validateOnChange
+                && this.props.validate
+                && this.props.validate(this.innerInput.value);
+            this.props.onChangeCallback(event, this.innerInput.value, validOnChange);
         }
     }
 
@@ -111,7 +120,32 @@ export class Input extends React.Component<IInputProps, any> {
             : null;
     }
 
-    render() {
+    private getRawInput(): JSX.Element {
+        const innerInputClasses = classNames({
+            invalid: !this.props.valid && contains(['number', 'text'], this.props.type),
+        }, this.props.innerInputClasses);
+
+        return (
+            <input
+                id={this.props.id}
+                className={innerInputClasses}
+                type={this.props.type}
+                defaultValue={!isUndefined(this.props.value) ? this.props.value : this.props.defaultValue}
+                ref={(innerInput: HTMLInputElement) => this.innerInput = innerInput}
+                onBlur={() => this.handleBlur()}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => this.handleChange(event)}
+                onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => this.handleKeyUp(event)}
+                placeholder={this.props.placeholder}
+                checked={!!this.props.checked}
+                disabled={!!this.props.disabled}
+                name={this.props.name}
+                required
+                readOnly={!!this.props.readOnly}
+            />
+        );
+    }
+
+    private getDefaultInput(): JSX.Element {
         const classes = classNames(
             'input-wrapper validate',
             {
@@ -119,31 +153,19 @@ export class Input extends React.Component<IInputProps, any> {
             },
             this.props.classes,
         );
-        const innerInputClasses = classNames({
-            invalid: !this.props.valid && contains(['number', 'text'], this.props.type),
-        }, this.props.innerInputClasses);
 
         return (
             <div className={classes} onClick={(e: React.MouseEvent<HTMLElement>) => this.handleClick(e)}>
-                <input
-                    id={this.props.id}
-                    className={innerInputClasses}
-                    type={this.props.type}
-                    defaultValue={!isUndefined(this.props.value) ? this.props.value : this.props.defaultValue}
-                    ref={(innerInput: HTMLInputElement) => this.innerInput = innerInput}
-                    onBlur={() => this.handleBlur()}
-                    onChange={() => this.handleChange()}
-                    onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => this.handleKeyUp(event)}
-                    placeholder={this.props.placeholder}
-                    checked={!!this.props.checked}
-                    disabled={!!this.props.disabled}
-                    name={this.props.name}
-                    required
-                    readOnly={!!this.props.readOnly}
-                />
+                {this.getRawInput()}
                 {this.getLabel()}
                 {this.props.children}
             </div>
         );
+    }
+
+    render() {
+        return this.props.rawInput
+            ? this.getRawInput()
+            : this.getDefaultInput();
     }
 }
