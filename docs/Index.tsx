@@ -62,8 +62,10 @@ import {OptionsCycleConnectedExamples} from '../src/components/optionsCycle/exam
 import {OptionsCycleExamples} from '../src/components/optionsCycle/examples/OptionsCycleExamples';
 import {PartialStringMatchExamples} from '../src/components/partial-string-match/PartialStringMatchExamples';
 import {RadioExamples} from '../src/components/radio/examples/RadioExamples';
+import {SearchBarExamples} from '../src/components/searchBar/SearchBarExamples';
 import {MultiSelectExamples} from '../src/components/select/examples/MultiSelectExamples';
 import {SingleSelectExamples} from '../src/components/select/examples/SingleSelectExamples';
+import {SideNavigationExample} from '../src/components/sideNavigation/examples/SideNavigationExample';
 import {SideNavigationLoadingExample} from '../src/components/sideNavigation/examples/SideNavigationLoadingExample';
 import {SliderExamples} from '../src/components/slider/examples/SliderExamples';
 import {SplitLayoutExamples} from '../src/components/splitlayout/examples/SplitLayoutExamples';
@@ -103,6 +105,7 @@ class App extends React.Component<any, any> {
                             <MembersExample />
                         </div>
                     </div>
+                    <SearchBarExamples />
                     <ColorBarExamples />
                     <PartialStringMatchExamples />
                     <BadgeExamples />
@@ -144,6 +147,7 @@ class App extends React.Component<any, any> {
                     <NavigationConnectedExamples />
                     <SubNavigationExamples />
                     <SubNavigationConnectedExamples />
+                    <SideNavigationExample />
                     <SideNavigationLoadingExample />
                     <TabsExamples />
                     <ActionBarExamples />
