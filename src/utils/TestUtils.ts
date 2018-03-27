@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 
 import {actionBarsReducer} from '../components/actions/ActionBarReducers';
 import {itemFiltersReducer} from '../components/actions/filters/ItemFilterReducers';
+import {autocompletesReducer} from '../components/autocomplete/AutocompleteReducers';
 import {checkboxesReducer} from '../components/checkbox/CheckboxReducers';
 import {groupableCheckboxesReducer} from '../components/checkbox/GroupableCheckboxReducers';
 import {collapsibleContainersReducer} from '../components/collapsibleContainer/CollapsibleContainerReducers';
@@ -47,6 +48,7 @@ export class TestUtils {
         };
 
         const reactVaporReducers = Redux.combineReducers<IReactVaporState>({
+            autocompletes: autocompletesReducer,
             lastAction: lastActionReducer,
             lastUpdatedComposite: lastUpdatedCompositeReducer,
             filters: filterBoxesReducer,
