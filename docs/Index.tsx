@@ -10,6 +10,7 @@ import {ActionBarConnectedExamples} from '../src/components/actions/examples/Act
 import {ActionBarExamples} from '../src/components/actions/examples/ActionBarExamples';
 import {ItemFilterConnectedExamples} from '../src/components/actions/filters/examples/ItemFilterConnectedExamples';
 import {ItemFilterExamples} from '../src/components/actions/filters/examples/ItemFilterExamples';
+import {AutocompleteExamples} from '../src/components/autocomplete/examples/AutocompleteExamples';
 import {BadgeExamples} from '../src/components/badge/examples/BadgeExamples';
 import {BlankSlateExample} from '../src/components/blankSlate/examples/BlankSlateExample';
 import {BreadcrumbsExamples} from '../src/components/breadcrumbs/examples/BreadcrumbsExamples';
@@ -65,6 +66,7 @@ import {RadioExamples} from '../src/components/radio/examples/RadioExamples';
 import {SearchBarExamples} from '../src/components/searchBar/SearchBarExamples';
 import {MultiSelectExamples} from '../src/components/select/examples/MultiSelectExamples';
 import {SingleSelectExamples} from '../src/components/select/examples/SingleSelectExamples';
+import {SideNavigationExample} from '../src/components/sideNavigation/examples/SideNavigationExample';
 import {SideNavigationLoadingExample} from '../src/components/sideNavigation/examples/SideNavigationLoadingExample';
 import {SliderExamples} from '../src/components/slider/examples/SliderExamples';
 import {SplitLayoutExamples} from '../src/components/splitlayout/examples/SplitLayoutExamples';
@@ -104,6 +106,7 @@ class App extends React.Component<any, any> {
                             <MembersExample />
                         </div>
                     </div>
+                    <AutocompleteExamples />
                     <SearchBarExamples />
                     <ColorBarExamples />
                     <PartialStringMatchExamples />
@@ -146,6 +149,7 @@ class App extends React.Component<any, any> {
                     <NavigationConnectedExamples />
                     <SubNavigationExamples />
                     <SubNavigationConnectedExamples />
+                    <SideNavigationExample />
                     <SideNavigationLoadingExample />
                     <TabsExamples />
                     <ActionBarExamples />
