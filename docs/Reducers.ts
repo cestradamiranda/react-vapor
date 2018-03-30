@@ -2,7 +2,9 @@ import * as Redux from 'redux';
 
 import {actionBarsReducer} from '../src/components/actions/ActionBarReducers';
 import {itemFiltersReducer} from '../src/components/actions/filters/ItemFilterReducers';
+import {autocompletesReducer} from '../src/components/autocomplete/AutocompleteReducers';
 import {checkboxesReducer} from '../src/components/checkbox/CheckboxReducers';
+import {groupableCheckboxesReducer} from '../src/components/checkbox/GroupableCheckboxReducers';
 import {collapsibleContainersReducer} from '../src/components/collapsibleContainer/CollapsibleContainerReducers';
 import {datePickersReducer} from '../src/components/datePicker/DatePickerReducers';
 import {dropdownsReducer} from '../src/components/dropdown/DropdownReducers';
@@ -42,6 +44,7 @@ const lastAction = (state: IReactVaporExampleState = null, action: Redux.Action)
 };
 
 export const Reducers: Redux.Reducer<IReactVaporExampleState> = Redux.combineReducers<IReactVaporExampleState>({
+    autocompletes: autocompletesReducer,
     tables: tablesReducer,
     membersCompositeState: membersReducers,
     lastUpdatedComposite: lastUpdatedCompositeReducer,
@@ -73,4 +76,5 @@ export const Reducers: Redux.Reducer<IReactVaporExampleState> = Redux.combineRed
     inputs: inputsReducer,
     searchBars: searchBarsReducer,
     flippables: flippablesReducer,
+    groupableCheckboxes: groupableCheckboxesReducer,
 });
