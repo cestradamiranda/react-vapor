@@ -13,37 +13,46 @@ describe('Checkbox', () => {
                 );
             }).not.toThrow();
         });
-    });
 
-    describe('<Checkbox />', () => {
-        let checkbox: ReactWrapper<IInputProps, any>;
+        describe('<Checkbox />', () => {
+            let checkbox: ReactWrapper<IInputProps, any>;
 
-        beforeEach(() => {
-            checkbox = mount(
-                <Checkbox />,
-                {attachTo: document.getElementById('App')},
-            );
+            const renderCheckbox = (props: IInputProps = {}) => {
+                checkbox = mount(
+                    <Checkbox {...props} />,
+                    {attachTo: document.getElementById('App')},
+                );
+            };
+
+            afterEach(() => {
+                checkbox.unmount();
+                checkbox.detach();
+            });
+
+            it('should call prop onClick when specified on click', () => {
+                renderCheckbox();
+
+                checkbox.setProps({onClick: clickSpy}).mount();
+                innerLabel.simulate('click');
+
+                expect(clickSpy.calls.count()).toBe(1);
+            });
+
+            it('should set inner input type to checkbox', () => {
+                renderCheckbox();
+
+                const innerInput = checkbox.find('input');
+
+                expect(innerInput.prop('type')).toBe('checkbox');
+            });
         });
 
-        afterEach(() => {
-            checkbox.unmount();
-            checkbox.detach();
-        });
-
-        it('should call prop onClick when specified on click', () => {
-            const clickSpy = jasmine.createSpy('onClick');
-            const innerLabel = checkbox.find('div');
-
-            checkbox.setProps({onClick: clickSpy}).mount();
-            innerLabel.simulate('click');
-
-            expect(clickSpy.calls.count()).toBe(1);
-        });
-
-        it('should set inner input type to checkbox', () => {
+        it('should set indeterminate on input', () => {
+            renderCheckbox({
+                indeterminate: true,
+            });
             const innerInput = checkbox.find('input');
-
-            expect(innerInput.prop('type')).toBe('checkbox');
+            expect((innerInput as any).node.indeterminate).toBe(true);
         });
     });
 });
