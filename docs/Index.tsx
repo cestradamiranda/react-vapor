@@ -10,6 +10,7 @@ import {ActionBarConnectedExamples} from '../src/components/actions/examples/Act
 import {ActionBarExamples} from '../src/components/actions/examples/ActionBarExamples';
 import {ItemFilterConnectedExamples} from '../src/components/actions/filters/examples/ItemFilterConnectedExamples';
 import {ItemFilterExamples} from '../src/components/actions/filters/examples/ItemFilterExamples';
+import {AutocompleteExamples} from '../src/components/autocomplete/examples/AutocompleteExamples';
 import {BadgeExamples} from '../src/components/badge/examples/BadgeExamples';
 import {BlankSlateExample} from '../src/components/blankSlate/examples/BlankSlateExample';
 import {BreadcrumbsExamples} from '../src/components/breadcrumbs/examples/BreadcrumbsExamples';
@@ -17,6 +18,7 @@ import {ButtonExamples} from '../src/components/button/examples/ButtonExamples';
 import {CalendarConnectedExamples} from '../src/components/calendar/examples/CalendarConnectedExamples';
 import {CheckboxConnectedExamples} from '../src/components/checkbox/examples/CheckboxConnectedExamples';
 import {CheckboxExamples} from '../src/components/checkbox/examples/CheckboxExamples';
+import {GroupableCheckboxConnectedExamples} from '../src/components/checkbox/examples/GroupableCheckboxConnectedExamples';
 import {ChildFormExamples} from '../src/components/childForm/examples/ChildFormExamples';
 import {ChosenSelectExamples} from '../src/components/chosen/examples/ChosenSelectExamples';
 import {CollapsibleContainerExamples} from '../src/components/collapsibleContainer/examples/CollapsibleContainerExamples';
@@ -178,6 +180,7 @@ class App extends React.Component<any, any> {
                     <RadioExamples />
                     <CheckboxExamples />
                     <CheckboxConnectedExamples />
+                    <GroupableCheckboxConnectedExamples />
                     <ChildFormExamples />
                     <StepProgressBarExamples />
                     <LabeledValueExamples />
