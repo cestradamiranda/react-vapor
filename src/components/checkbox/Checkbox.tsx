@@ -1,13 +1,37 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import {IInputProps, Input} from '../input/Input';
 
-export class Checkbox extends React.Component<IInputProps, any> {
+export interface ICheckboxProps extends IInputProps {
+    handleOnClick?: (isChecked: boolean) => void;
+}
+
+export class Checkbox extends React.Component<ICheckboxProps, any> {
     private onClick(e: React.MouseEvent<HTMLElement>) {
         if (this.props.onClick) {
             e.preventDefault();
             e.stopPropagation();
             this.props.onClick(e);
+        }
+
+        if (this.props.handleOnClick) {
+            this.props.handleOnClick(this.props.checked);
+        }
+    }
+
+    componentDidMount() {
+        this.updateIndeterminate();
+    }
+
+    componentDidUpdate() {
+        this.updateIndeterminate();
+    }
+
+    private updateIndeterminate() {
+        const inputElements = ReactDOM.findDOMNode(this).getElementsByTagName('input');
+        if (inputElements.length) {
+            inputElements[0].indeterminate = !!this.props.indeterminate;
         }
     }
 
