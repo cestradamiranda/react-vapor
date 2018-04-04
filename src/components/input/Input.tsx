@@ -29,6 +29,7 @@ export interface IInputStateProps {
     disabled?: boolean;
     value?: string;
     valid?: boolean;
+    indeterminate?: boolean;
 }
 
 export interface IInputDispatchProps {
@@ -143,7 +144,7 @@ export class Input extends React.Component<IInputProps, IInputState> {
             this.props.classes,
         );
         const innerInputClasses = classNames({
-            invalid: !this.state.valid && contains(['number', 'text'], this.props.type),
+            invalid: !this.props.valid && contains(['number', 'text'], this.props.type),
         }, this.props.innerInputClasses);
 
         return (
