@@ -1,7 +1,9 @@
 import {IActionOptions} from './components/actions/Action';
 import {IActionBarState} from './components/actions/ActionBarReducers';
 import {IItemFilterState} from './components/actions/filters/ItemFilterReducers';
+import {IAutocompleteState} from './components/autocomplete/AutocompleteReducers';
 import {ICheckboxState} from './components/checkbox/CheckboxReducers';
+import {IGroupableCheckboxesState} from './components/checkbox/GroupableCheckboxReducers';
 import {ICollapsibleContainerState} from './components/collapsibleContainer/CollapsibleContainerReducers';
 import {IDatePickerState} from './components/datePicker/DatePickerReducers';
 import {IDropdownState} from './components/dropdown/DropdownReducers';
@@ -32,9 +34,11 @@ import {ITableStateModifier} from './components/tables/TableActions';
 import {ITableHeaderCellsState} from './components/tables/TableHeaderCellReducers';
 import {ITableData, ITablesState} from './components/tables/TableReducers';
 import {ITableRowState} from './components/tables/TableRowReducers';
+import {ITextAreaState} from './components/textarea/TextAreaReducers';
 import {IToastsState} from './components/toast/ToastReducers';
 
 export interface IReactVaporState {
+    autocompletes: IAutocompleteState[];
     lastUpdatedComposite?: ILastUpdatedState[];
     facets?: IFacetState[];
     filters?: IFilterState[];
@@ -62,8 +66,9 @@ export interface IReactVaporState {
     checkboxes?: ICheckboxState[];
     inputs?: IInputState[];
     collapsibleContainers?: ICollapsibleContainerState[];
-    searchBars: ISearchBarState[];
+    searchBars?: ISearchBarState[];
     flippables?: IFlippableState[];
+    textAreas?: ITextAreaState[];
 }
 
 export interface IReduxActionsPayload {
