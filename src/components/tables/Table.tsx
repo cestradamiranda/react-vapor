@@ -36,7 +36,7 @@ export interface IPredicateAttributes {
 }
 
 export type IAttributeFormatter = (attributeValue: any, attributeName?: string, data?: IData) => JSXRenderable;
-export type IAttributeNameOrValueFormatter = (attributeNameOrValue: string) => React.ReactNode;
+export type IAttributeNameOrValueFormatter = (attributeNameOrValue: string, data?: IData) => React.ReactNode;
 
 export interface ITableHeadingAttribute {
     attributeName: string;
@@ -57,6 +57,8 @@ export interface ITableOwnProps extends React.ClassAttributes<Table>, ITableBody
     id: string;
     blankSlateDefault: IBlankSlateProps;
     tableContainerClasses?: string[];
+    tableClasses?: string[];
+    tableBodyClasses?: string[];
     initialTableData?: ITableData;
     actionBar?: true | IActionBarProps;
     blankSlateNoResultsOnAction?: IBlankSlateProps;
@@ -68,6 +70,9 @@ export interface ITableOwnProps extends React.ClassAttributes<Table>, ITableBody
     prefixContent?: IContentProps;
     navigation?: true | INavigationChildrenProps;
     lastUpdatedLabel?: string;
+    withoutLastUpdated?: boolean;
+    withFixedHeader?: boolean;
+    handleOnRowClick?: (actions: IActionOptions[], rowData: IData) => void;
     manual?: (
         tableOwnProps: ITableOwnProps,
         shouldResetPage: boolean,
@@ -157,21 +162,37 @@ export class Table extends React.Component<ITableProps, {}> {
                 'mod-loading-content': !!(this.props.tableCompositeState && this.props.tableCompositeState.isLoading),
                 'loading-component': this.isInitialLoad,
             },
+            this.props.tableClasses,
         );
+
+        const tableChildLastUpdatedNode: React.ReactNode = this.props.withoutLastUpdated
+            ? null
+            : <TableChildLastUpdated {...this.props} />;
 
         return (
             <div className={classNames('table-container', this.props.tableContainerClasses)}>
                 <TableChildActionBar {...this.props} />
-                <table className={tableClasses}>
+                {this.setFixedHeaderWrapper(<table className={tableClasses}>
                     <TableChildLoadingRow {...this.props} isInitialLoad={this.isInitialLoad} />
                     <TableChildHeader {...this.props} />
                     {this.getTableBody()}
-                </table>
+                </table>)
+                }
                 <TableChildBlankSlate {...this.props} isInitialLoad={this.isInitialLoad} />
                 <TableChildNavigation {...this.props} />
-                <TableChildLastUpdated {...this.props} />
+                {tableChildLastUpdatedNode}
             </div>
         );
+    }
+
+    private setFixedHeaderWrapper(tableElement: React.ReactNode) {
+        return this.props.withFixedHeader
+            ? (<div className='fixed-header-table-container'>
+                <div className='fixed-header-table'>
+                    {tableElement}
+                </div>
+            </div>)
+            : tableElement;
     }
 
     private hasTableCompositeStateChanged(currentTableCompositeState: ITableCompositeState, nextTableCompositeState: ITableCompositeState): boolean {
@@ -194,7 +215,7 @@ export class Table extends React.Component<ITableProps, {}> {
     private getTableBody() {
         const tableData = this.props.tableCompositeState.data || this.props.initialTableData;
 
-        return tableData.displayedIds.map((id: string, yPosition: number): JSX.Element => {
+        const tableBodyNode: React.ReactNode = tableData.displayedIds.map((id: string, yPosition: number): JSX.Element => {
             const currentRowData: IData = tableData.byId[id];
 
             return (
@@ -207,8 +228,15 @@ export class Table extends React.Component<ITableProps, {}> {
                     headingAttributes={this.props.headingAttributes}
                     collapsibleFormatter={this.props.collapsibleFormatter}
                     onRowClick={(actions: IActionOptions[]) => this.props.onRowClick(actions)}
+                    handleOnRowClick={this.props.handleOnRowClick}
                 />
             );
         });
+
+        return this.props.collapsibleFormatter
+            ? tableBodyNode
+            : (<tbody className={classNames(this.props.tableBodyClasses)}>
+                {tableBodyNode}
+            </tbody>);
     }
 }
