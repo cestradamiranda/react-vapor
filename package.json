@@ -65,7 +65,7 @@
     "@types/lorem-ipsum": "1.0.2",
     "@types/rc-slider": "8.2.3",
     "@types/react": "15.6.1",
-    "@types/react-bootstrap": "0.0.52",
+    "@types/react-bootstrap": "0.32.9",
     "@types/react-codemirror": "1.0.1",
     "@types/react-dom": "15.5.4",
     "@types/react-redux": "5.0.8",
