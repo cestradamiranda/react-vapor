@@ -25,7 +25,7 @@ export interface ILogoCardProps {
     title: string;
 }
 
-export class LogoCard extends React.Component<ILogoCardProps> {
+export class LogoCard extends React.Component<ILogoCardProps & React.HTMLProps<HTMLDivElement>> {
     static defaultProps: Partial<ILogoCardProps> = {
         badges: [],
         disabled: false,
@@ -77,7 +77,8 @@ export class LogoCard extends React.Component<ILogoCardProps> {
         return (
             <div
                 className={containerClassName}
-                onClick={() => this.handleClick()} >
+                onClick={() => this.handleClick()}
+                {...this.props}>
                 <div className='logo-card-logo'>
                     <Svg svgName={this.props.svgName} className={logoIconClassName} />
                 </div>
