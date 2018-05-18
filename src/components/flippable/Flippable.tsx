@@ -24,7 +24,7 @@ export interface IFlippableStateProps {
 export interface IFlippableProps extends IFlippableOwnProps, IFlippableDispatchProps,
     IFlippableStateProps {}
 
-export class Flippable extends React.Component<IFlippableProps, any> {
+export class Flippable extends React.Component<IFlippableProps & React.HTMLProps<HTMLDivElement>, any> {
     static CONTAINER_CLASSNAME: string = 'flippable';
     static FLIPPER_CLASSNAME: string = 'flipper';
     static sides = {
@@ -70,7 +70,7 @@ export class Flippable extends React.Component<IFlippableProps, any> {
         );
 
         return (
-            <div className={containerClassName}>
+            <div className={containerClassName} {...this.props}>
                 <div className={flipperClassName}>
                     <div
                         className={Flippable.sides.FRONT}
