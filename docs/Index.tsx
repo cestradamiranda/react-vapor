@@ -102,7 +102,7 @@ class App extends React.Component<any, any> {
         return (
             <Provider store={ReactVaporStore}>
                 <div className='coveo-form'>
-                    {/* <div className='form-group'>
+                    <div className='form-group'>
                         <label className='form-control-label'>
                             My list of members
                         </label>
