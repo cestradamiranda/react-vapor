@@ -109,8 +109,8 @@ class App extends React.Component<any, any> {
                         <div className='form-control'>
                             <MembersExample />
                         </div>
-                    </div>
-                    <AutocompleteExamples />
+                    </div> */}
+                    {/* <AutocompleteExamples />
                     <TextAreaExamples />
                     <SearchBarExamples />
                     <ColorBarExamples />
@@ -144,13 +144,13 @@ class App extends React.Component<any, any> {
                     <FilterBoxExamples />
                     <FilterBoxConnectedExamples />
                     <FacetExamples />
-                    <FacetConnectedExamples />
+                    <FacetConnectedExamples /> */}
                     <ModalExamples />
                     <ModalConnectedExamples />
                     <ModalCompositeExamples />
                     <ModalCompositeConnectedExamples />
                     <ModalPromptExamples />
-                    <NavigationExamples />
+                    {/* <NavigationExamples />
                     <NavigationConnectedExamples />
                     <SubNavigationExamples />
                     <SubNavigationConnectedExamples />
