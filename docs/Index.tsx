@@ -135,7 +135,6 @@ class App extends React.Component<any, any> {
                     <BreadcrumbHeaderExample />
                     <SingleSelectExamples />
                     <MultiSelectExamples />
-                    <DropdownSearchExamples />
                     <FlatSelectExamples />
                     <TooltipExamples />
                     <ChosenSelectExamples />
