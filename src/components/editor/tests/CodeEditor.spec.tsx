@@ -114,5 +114,10 @@ describe('CodeEditor', () => {
             expect(newList).not.toEqual(currentKeywords);
             expect(newList).toEqual(currentKeywords.concat(expectedNewKeywords));
         });
+
+        it('should have a border by default', () => {
+            expect(CodeEditor.defaultProps.className).toBe('mod-border');
+            expect(codeEditor.find(ReactCodeMirror.UnControlled).props().className).toBe('mod-border');
+        });
     });
 });
