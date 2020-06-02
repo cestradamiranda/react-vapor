@@ -1,0 +1,8 @@
+**/node_modules/
+**/dist/
+**/_gh_pages/
+packages/vapor/docs
+.github
+**/sprites.scss
+**/coverage
+**/CHANGELOG.md

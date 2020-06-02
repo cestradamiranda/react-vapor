@@ -1,0 +1,27 @@
+{
+    "packages": [
+        "packages/*"
+    ],
+    "version": "5.49.0",
+    "command": {
+        "publish": {
+            "conventionalCommits": true,
+            "allowBranch": [
+                "master"
+            ]
+        },
+        "version": {
+            "conventionalCommits": true,
+            "message": "chore(release): publish %s [skip travis]"
+        },
+        "bootstrap": {
+            "hoist": true,
+            "nohoist": [
+                "unidiff",
+                "query-string",
+                "strict-uri-encode",
+                "split-on-first"
+            ]
+        }
+    }
+}

@@ -1,15 +1,12 @@
-# Ignore compiled files
-dist
-coverage
-docs/assets/
-
 # Node files
-node_modules
+**/node_modules
+npm-debug.log.*
 
-# OS/editor 
+# OS/editor
 ._*
 .DS_Store
 .idea
+.vscode
 
 # Other various
 *.diff
@@ -24,5 +21,12 @@ node_modules
 # package-lock.json
 package-lock.json
 
-# Visual Studio Code files
-.vscode
+# travis
+travis-deploy-key
+
+# distribution
+**/dist
+
+# temporary files
+**/coverage
+**/tmp

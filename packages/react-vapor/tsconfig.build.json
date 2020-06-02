@@ -1,0 +1,13 @@
+{
+    "extends": "./tsconfig",
+    "compilerOptions": {
+        "removeComments": false,
+        "sourceMap": true,
+        "baseUrl": "./",
+        "paths": {
+            "*": ["types/*", "*"]
+        }
+    },
+    "exclude": ["node_modules", "dist", "coverage", "*.js", "./src/**/*.spec.*"],
+    "include": ["src"]
+}

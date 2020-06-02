@@ -1,0 +1,78 @@
+@import '../common/palette';
+@import '../variables';
+
+div.slider-container {
+    display: flex;
+    align-items: flex-end;
+
+    div.appended-value.vapor-slider.rc-slider {
+        flex: 15;
+    }
+    div.slider-value {
+        flex: 2;
+        align-items: flex-end;
+
+        justify-content: center;
+        padding-top: 1.2em;
+    }
+}
+
+.vapor-slider.rc-slider {
+    .rc-slider-rail {
+        height: $slider-rail-height;
+        margin-top: $slider-rail-margin-top;
+        background-color: $grey-3;
+    }
+
+    .rc-slider-track {
+        height: $slider-track-height;
+        background: $blue-5;
+        border-radius: 0;
+    }
+
+    .rc-slider-dot {
+        bottom: initial;
+        width: $slider-dot-width;
+        height: $slider-dot-height;
+        margin-top: $slider-dot-margin-top;
+        margin-left: $slider-dot-margin-left;
+        background-color: $heather;
+        border: none;
+        border-radius: initial;
+        box-shadow: $slider-dot-box-shadow;
+    }
+
+    .rc-slider-handle {
+        width: $slider-handle-width;
+        height: $slider-handle-height;
+        margin-top: $slider-handle-margin-top;
+        background: url('../../resources/icons/svg/slider-handle.svg') no-repeat;
+        background-size: $slider-handle-background-size;
+        border: none;
+        border-radius: $slider-handle-border-radius;
+        box-shadow: $slider-handle-box-shadow;
+    }
+
+    .rc-slider-mark-text {
+        bottom: 3 * $spacing;
+        color: $bali-hai;
+    }
+}
+
+.vapor-slider-overlay {
+    padding: 0;
+
+    &[class*='rc-slider-tooltip-placement-'] {
+        .rc-slider-tooltip-arrow {
+            display: none;
+        }
+
+        .rc-slider-tooltip-inner {
+            color: $dark-blue;
+            font-size: $small-font-size;
+            line-height: $default-line-height;
+            background-color: transparent;
+            box-shadow: none;
+        }
+    }
+}

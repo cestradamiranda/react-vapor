@@ -1,0 +1,43 @@
+.member {
+    display: flex;
+    align-items: center;
+
+    .member-icon {
+        width: 24px;
+        height: 24px;
+        overflow: hidden;
+        background-color: $white;
+        border-radius: 100%;
+
+        .member-icon-provider {
+            display: block;
+            max-width: 16px;
+            height: 24px;
+            margin: auto;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .member-info {
+        margin-left: 14px;
+
+        .member-info-name {
+            font-weight: 700;
+            font-size: 13px;
+            line-height: 16px;
+            text-transform: uppercase;
+        }
+
+        .member-info-email {
+            margin-top: 2px;
+            font-weight: 400;
+
+            font-size: 12px;
+            line-height: 15px;
+        }
+    }
+}

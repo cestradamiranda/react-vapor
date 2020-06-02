@@ -1,0 +1,146 @@
+import classNames from 'classnames';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import {IReactVaporState} from '../../ReactVapor';
+import {IDispatch, ReduxConnect} from '../../utils/ReduxUtils';
+import {Button, IButtonProps} from '../button/Button';
+import {Svg} from '../svg/Svg';
+import {addMenu, removeMenu, toggleMenu} from './MenuActions';
+import {IMenuState} from './MenuReducers';
+
+export interface IMenuOwnProps {
+    id: string;
+    className?: string;
+    toggleClassName?: string;
+    dropdownClassName?: string;
+    positionRight?: boolean;
+    closeOnSelectItem?: boolean;
+    buttonSvg?: React.ReactNode;
+    customOffset?: number;
+    buttonProps?: Partial<IButtonProps>;
+}
+
+export interface IMenuStateProps {
+    isOpen?: boolean;
+}
+
+export interface IMenuDispatchProps {
+    onRender?: () => void;
+    onDestroy?: () => void;
+    onToggleMenu?: () => void;
+    onDocumentClick?: () => void;
+}
+
+export interface IMenuProps extends IMenuOwnProps, IMenuStateProps, IMenuDispatchProps {}
+
+const mapStateToProps = (state: IReactVaporState, ownProps: IMenuOwnProps): IMenuStateProps => {
+    const menu: IMenuState = state.menus[ownProps.id];
+
+    return {
+        isOpen: menu && menu.open,
+    };
+};
+
+const mapDispatchToProps = (dispatch: IDispatch, ownProps: IMenuOwnProps): IMenuDispatchProps => ({
+    onRender: () => dispatch(addMenu(ownProps.id)),
+    onDestroy: () => dispatch(removeMenu(ownProps.id)),
+    onToggleMenu: () => dispatch(toggleMenu(ownProps.id)),
+    onDocumentClick: () => dispatch(toggleMenu(ownProps.id, false)),
+});
+
+@ReduxConnect(mapStateToProps, mapDispatchToProps)
+export class MenuConnected extends React.Component<IMenuProps, {}> {
+    private list: HTMLDivElement;
+    private button: HTMLDivElement;
+
+    static defaultProps: Partial<IMenuProps> = {
+        positionRight: false,
+        closeOnSelectItem: true,
+        customOffset: 0,
+    };
+
+    componentWillMount() {
+        this.props.onRender();
+        document.addEventListener('mousedown', this.handleDocumentClick);
+    }
+
+    componentWillUnmount() {
+        this.props.onDestroy();
+        document.removeEventListener('mousedown', this.handleDocumentClick);
+    }
+
+    render() {
+        const pickerClasses = classNames('select-dropdown dropdown', this.props.className, {
+            open: this.props.isOpen,
+        });
+        const dropdownClasses = classNames(
+            'select-dropdown-container absolute bg-pure-white',
+            this.props.dropdownClassName,
+            {
+                hidden: !this.props.isOpen,
+            }
+        );
+
+        return (
+            <div className={pickerClasses}>
+                <div ref={(ref: HTMLDivElement) => (this.button = ref)}>
+                    <Button
+                        classes={classNames('btn menu-toggle', this.props.toggleClassName, {
+                            'bg-light-grey': this.props.isOpen,
+                        })}
+                        onMouseUp={(e: React.MouseEvent<HTMLElement>) => this.onToggleMenu(e)}
+                        {...this.props.buttonProps}
+                    >
+                        {this.props.buttonSvg ? this.props.buttonSvg : this.getDefaultSvg()}
+                    </Button>
+                </div>
+                <div
+                    className={dropdownClasses}
+                    ref={(ref: HTMLDivElement) => (this.list = ref)}
+                    onClick={() => this.onClickMenu()}
+                >
+                    {this.props.children}
+                </div>
+            </div>
+        );
+    }
+
+    private onClickMenu() {
+        if (this.props.closeOnSelectItem) {
+            this.props.onDocumentClick();
+        }
+    }
+
+    private getDefaultSvg() {
+        return <Svg svgName="more-append" svgClass="fill-medium-blue icon mod-lg" />;
+    }
+
+    private onToggleMenu(e: React.SyntheticEvent<HTMLElement>) {
+        this.setListPosition();
+
+        e.stopPropagation();
+        e.preventDefault();
+
+        this.props.onToggleMenu();
+    }
+
+    private setListPosition() {
+        if (this.button) {
+            this.list.style.minWidth = `${this.button.clientWidth + 2}px`;
+            this.props.positionRight
+                ? (this.list.style.right = `${this.button.offsetLeft + this.props.customOffset}px`)
+                : (this.list.style.left = `${this.button.offsetLeft + this.props.customOffset}px`);
+        }
+    }
+
+    private handleDocumentClick = (e: MouseEvent) => {
+        if (this.props.isOpen && document.body.contains(e.target as HTMLElement)) {
+            const list: Element | Text = ReactDOM.findDOMNode(this.list);
+            const button: Element | Text = ReactDOM.findDOMNode(this.button);
+
+            if (!list.contains(e.target as Node) && !button.contains(e.target as Node)) {
+                this.props.onDocumentClick();
+            }
+        }
+    };
+}

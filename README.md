@@ -1,45 +1,54 @@
 # React-Vapor
 
-[![Build Status](https://travis-ci.org/coveo/react-vapor.svg?branch=master)](https://travis-ci.org/coveo/react-vapor)
-[![codecov](https://codecov.io/gh/coveo/react-vapor/branch/master/graph/badge.svg)](https://codecov.io/gh/coveo/react-vapor)
-[![bitHound Overall Score](https://www.bithound.io/github/coveo/react-vapor/badges/score.svg)](https://www.bithound.io/github/coveo/react-vapor)
-[![bitHound Dependencies](https://www.bithound.io/github/coveo/react-vapor/badges/dependencies.svg)](https://www.bithound.io/github/coveo/react-vapor/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/coveo/react-vapor/badges/devDependencies.svg)](https://www.bithound.io/github/coveo/react-vapor/master/dependencies/npm)
-[![Greenkeeper badge](https://badges.greenkeeper.io/coveo/react-vapor.svg)](https://greenkeeper.io/)
-[![Npm total downloads badge](https://img.shields.io/npm/dt/react-vapor.svg)](https://www.npmjs.com/package/react-vapor)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square&logo=appveyor)](https://conventionalcommits.org)
 
-Vapor CSS components implemented with React!
+React-Vapor is Coveo's collection of UI styles used in Coveo Cloud Administration Console. All components and their documentation are available in [the demo page](https://vapor.cloud.coveo.com/). Vapor package contains the generic style classes used across the components and react-vapor is a react implementation of multiple visual and behavioural components.
 
-## Install
-```sh
-npm install react-vapor
+## Usage
+
+```bash
+npm install react-vapor coveo-styleguide
 ```
-> The project is at its early stages, some components can still have _lots_ of breaking changes between versions.
-
-### Dependencies
-Those are required in order to use react-vapor in your own project:
-- [Tether](http://tether.io/)  (tested with 1.3.7)
-- [React](https://facebook.github.io/react/) (tested with 15.3.1)
-- [React DOM](https://facebook.github.io/react/) (tested with 15.3.1)
-- [Underscore](http://underscorejs.org/)  (tested with 1.8.3)
-
-### Building
-Make sure you have Node JS and NPM installed.
-Run `npm install` to get the required dependencies and build the librairy.
-
-### Running documentation locally
-To build and run the doc locally, simply run `npm start`.
-
-### Running the tests suite
-Run `npm test` to run all tests and get the code coverage!
 
 ## Contributing
-1. Search the issues, if it is not already there, add one.
-2. Fork the repository
-3. Code Code Code
-4. Submit a pull request
-5. Wait for some nice guy to review and merge
+
+### Build
+
+Make sure you have
+
+-   [Node.js](https://nodejs.org/)'s LTS version
+-   [NPM](https://www.npmjs.com/package/npm)'s LTS version
+
+## Setup
+
+All the commands in the instructions must be run at the root of the project.
+
+First you need to install the project's dependencies and link the projects together.
+
+```bash
+npm run setup
+```
+
+### Running the demo pages locally
+
+```bash
+npm start
+```
+
+Changes made to any source files in any package will make the demo rebuild and refresh. Since the projects are in the same repository and we use Lerna, we don't have to link them together.
+
+### Commiting your changes
+
+Every commit made to this repository must comply to the [Conventional Commits specification](https://www.conventionalcommits.org/). Our build system is configured to automatically release and publish new versions according to this convention.
+
+> We have integrated an optionnal [command line utility](https://github.com/commitizen/cz-cli) to help you build proper commit messages.
+>
+> ```bash
+> git add . # stage the changes you want to commit
+> npm run commit-cli # execute the commit message helper
+> ```
 
 ## License
-Vapor is distributed under [MIT license](LICENSE).
 
+All packages under this repository are distributed under [Apache 2.0 license](LICENSE).

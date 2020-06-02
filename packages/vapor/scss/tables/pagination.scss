@@ -1,0 +1,67 @@
+.pagination-container {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: $pagination-vertical-margin;
+
+    &.loading-view {
+        .spinner {
+            display: block;
+            margin-top: 30px;
+        }
+
+        .items-per-page,
+        .pagination {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+    }
+
+    .items-per-page {
+        margin: $pagination-vertical-margin $header-padding 0 $header-padding;
+    }
+
+    .pagination {
+        margin: $pagination-vertical-margin calc(#{$header-padding} - 5px) 0 calc(#{$header-padding} - 5px);
+    }
+
+    .pagination .pagination-icon {
+        vertical-align: -2px;
+    }
+
+    .spinner {
+        display: none;
+    }
+
+    .change-page-link {
+        padding: 0;
+        color: $medium-blue;
+        font-size: $default-font-size;
+        background-color: $pure-white;
+        border: none;
+        cursor: pointer;
+
+        .icon {
+            fill: $medium-blue;
+        }
+
+        &.disabled {
+            color: $medium-grey;
+            cursor: default;
+            pointer-events: none;
+
+            .icon {
+                fill: $medium-grey;
+            }
+        }
+    }
+}
+
+.modal,
+.modal-container .modal-body {
+    .pagination-container {
+        .items-per-page,
+        .pagination {
+            margin: $pagination-vertical-margin -5px 0 0;
+        }
+    }
+}
